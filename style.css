@@ -1,0 +1,15 @@
+body{
+    background-color: hsl(202, 52%, 83%);
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: Helvetica;
+}
+
+.container
+{
+    border: 1px solid #000000;
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: #62cae6;
+}
