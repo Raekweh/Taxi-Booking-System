@@ -17,14 +17,14 @@
 
         <div id = "content">
             <form>
-                <label>Customer Name:  <input type="text" name="cname"> </label>
-                <label><br>Phone Number: <input type="text" name="phone"></label>
+                <label>Customer Name:  <input type="text" name="cname" autocomplete="off"> </label>
+                <label><br>Phone Number: <input type="text" name="phone" autocomplete="off" minlength="10" maxlength="12"></label>
                 <label><br>Street Number: <input type="text" name="snumber"></label>
                 <label><br>Street Name: <input type="text" name="stname"></label>
                 <label><br>Suburb: <input type="text" name="sbname"></label>
                 <label><br>Destination Suburb: <input type="text" name="dsbname"></label>
-                <label><br>Pick-up Date: <input type="text" name="date"></label>
-                <label><br>Pick-up Time: <input type="text" name="time">  <br><br> </label>
+                <label><br>Pick-up Date: <input type="date" name="date"></label>
+                <label><br>Pick-up Time: <input type="time" name="time">  <br><br> </label>
 
                <input name="submit" type = "button" onClick = "getData('bookingServer.php','content', cname.value, phone.value) " value = "Fetch from server">
        
