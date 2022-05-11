@@ -27,6 +27,7 @@
 			$phoneNumber = $_POST['phone'];
 			$unitNumber = $_POST['unitnumber'];
 			$streetNumber = $_POST['streetnumber'];
+			$suburbName = $_POST['suburb'];
 
 			// sleep for 3 seconds to slow server response down
 			sleep(3);
@@ -35,6 +36,8 @@
 			Phone Number: $phoneNumber.</br>
 			Unit Number $unitNumber.</br>
 			Street Number $streetNumber.</br>
+			Subrub $suburbName.</br>
+			
 			 </p>";
 		}
 	}
@@ -99,6 +102,7 @@
 		return false;
 	}
 
+	//Street number validation
 	function validsNumber($snumber)
 	{
 		if(empty($snumber) || !isset($snumber))
@@ -107,5 +111,30 @@
 			return false;
 		}
 		return true;
+	}
+
+	//Street name Validation
+	function validsName($sname)
+	{
+	    //Checks if the date is null or empty.
+		if (empty($sname) || !isset($sname) || $sname = " ") 
+		{
+			echo "<p>Please enter a name.</p>";
+			return false;
+		}
+		else
+		{
+			$pattern = "/^[a-zA-Z\s]*$/";
+			//Street name should only contain characters and space.
+			if(preg_match($pattern, $sname))
+			{
+				return true;
+			}
+			else
+			{
+				echo "<p>The street name box is incorrect </br>
+				Your street name must not include any special character nor numbers</p>";
+			}
+		}
 	}
 ?>
