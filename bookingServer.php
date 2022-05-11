@@ -18,7 +18,7 @@
 	{
 		echo "<p>Connect to database successful</p>";
 
-		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']))
+		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']) && validpickupDate($_POST['pickupdate']) && validpickupTime($_POST['pickuptime']))
 		{
 			echo "<h1> Thank you for your booking!</h1>";
 
@@ -28,6 +28,9 @@
 			$unitNumber = $_POST['unitnumber'];
 			$streetNumber = $_POST['streetnumber'];
 			$suburbName = $_POST['suburb'];
+			$desintationSuburb = $_POST['destinationsuburb'];
+			$pickupDate = $_POST['pickupdate'];
+			$pickupTime = $_POST['pickuptime'];
 
 			// sleep for 3 seconds to slow server response down
 			sleep(3);
@@ -37,7 +40,9 @@
 			Unit Number $unitNumber.</br>
 			Street Number $streetNumber.</br>
 			Subrub $suburbName.</br>
-			
+			Desintation Subrub $desintationSuburb.</br>
+			pickup Date: $pickupDate.</br>
+			pickup Time $pickupTime.</br>
 			 </p>";
 		}
 	}
@@ -119,7 +124,7 @@
 	    //Checks if the date is null or empty.
 		if (empty($sname) || !isset($sname) || $sname = " ") 
 		{
-			echo "<p>Please enter a name.</p>";
+			echo "<p>Please enter a street name.</p>";
 			return false;
 		}
 		else
@@ -137,4 +142,29 @@
 			}
 		}
 	}
+
+    //Pick up date validation.
+    function validpickupDate($date)
+    {
+        //Checks if the date is null or empty.
+        if (empty($date) || !isset($date)) 
+        {
+            echo "<p>Please insert a pick up date</p>";
+            return false;
+        }
+           return true;        
+    }
+
+
+    //Pick up time validation.
+    function validpickupTime($time)
+    {
+        //Checks if the date is null or empty.
+        if (empty($time) || !isset($time)) 
+        {
+            echo "<p>Pleaes insert a pick up time</p>";
+            return false;
+        }
+        return true;
+    }
 ?>
