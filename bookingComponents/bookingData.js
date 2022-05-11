@@ -1,10 +1,10 @@
 //
 var xhr = createRequest();
-function getData(dataSource, divID, cname, mphone,unumber) {
+function getData(dataSource, divID, cname, mphone, unumber, snumber) {
   if (xhr) {
     var obj = document.getElementById(divID);
     var requestbody = "name=" + encodeURIComponent(cname) + "&phone=" + encodeURIComponent(mphone)
-     + "&unitnumber=" + encodeURIComponent(unumber);
+     + "&unitnumber=" + encodeURIComponent(unumber) + "&streetnumber=" + encodeURIComponent(snumber);
     xhr.open("POST", dataSource, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 

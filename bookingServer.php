@@ -18,7 +18,7 @@
 	{
 		echo "<p>Connect to database successful</p>";
 
-		if(validcname($_POST['name']) && validPhone($_POST['phone']))
+		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']))
 		{
 			echo "<h1> Thank you for your booking!</h1>";
 
@@ -26,11 +26,16 @@
 			$customerName = $_POST['name'];
 			$phoneNumber = $_POST['phone'];
 			$unitNumber = $_POST['unitnumber'];
+			$streetNumber = $_POST['streetnumber'];
 
 			// sleep for 3 seconds to slow server response down
 			sleep(3);
 			// write back the password concatenated to end of the name
-			echo "<p> $customerName : $phoneNumber : $unitNumber.</p>";
+			echo "<p> Customer Name: $customerName. </br> 
+			Phone Number: $phoneNumber.</br>
+			Unit Number $unitNumber.</br>
+			Street Number $streetNumber.</br>
+			 </p>";
 		}
 	}
 
@@ -66,11 +71,10 @@
 		if(empty($phone) || !isset($phone))
 		{
 			echo "<p>Please enter a phone number</p>";
+			return false;
 		}
 		else
 		{
-			echo strlen($phone);
-
 			//Checks if the length of the phone number is between 10 to 12 digits.
 			if(strlen($phone)>=10 && strlen($phone)<=12)
 			{
@@ -83,12 +87,25 @@
 				{
 					echo "<p>The phone box is incorrect </br>
 					The phone must only contain numbers and 10 to 12 digits long</p>";
+					return false;
 				}
 			}
 			else 
 			{
 				echo "<p> The phone number must be 10 to 12 digits long</p>";
+				return false;
 			}
 		}
+		return false;
+	}
+
+	function validsNumber($snumber)
+	{
+		if(empty($snumber) || !isset($snumber))
+		{
+			echo "<p>Please enter a street number</p>";
+			return false;
+		}
+		return true;
 	}
 ?>
