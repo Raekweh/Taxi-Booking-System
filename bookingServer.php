@@ -67,14 +67,19 @@
  
  			echo $insert_sql;
 
-			$insertingResult = @mysqli_query($conn, $insert_sql);
-			if ($insertingResult !== FALSE) 
-			{
-				echo "<p>Successful.</p>";
-			} 
-			else{
-				echo "<p>Failed.</p>";
-			}
+			insertingQuery($conn, $insert_sql);
+		}
+	}
+
+	function insertingQuery($conn, $insert_sql)
+	{
+		$insertingResult = @mysqli_query($conn, $insert_sql);
+		if ($insertingResult !== FALSE) 
+		{
+			echo "<p>Successful.</p>";
+		} 
+		else{
+			echo "<p>Failed.</p>";
 		}
 	}
 
