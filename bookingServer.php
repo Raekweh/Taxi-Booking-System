@@ -17,7 +17,33 @@
 	else
 	{
 		echo "<p>Connect to database successful</p>";
-		//Check for validation
+
+			// sleep(3);
+
+			// $customerName = $_POST['name'];
+			// $phoneNumber = $_POST['phone'];
+			// $unitNumber = $_POST['unitnumber'];
+			// $streetNumber = $_POST['streetnumber'];
+			// $streetName = $_POST['streetname'];
+			// $suburbName = $_POST['suburb'];
+			// $desintationSuburb = $_POST['destinationsuburb'];
+			// $pickupDate = $_POST['pickupdate'];
+			// $pickupTime = $_POST['pickuptime'];
+
+			//  $insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
+			//  VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
+
+			// echo $insert_sql;
+
+			// $insertingResult = @mysqli_query($conn, $insert_sql);
+			// if ($insertingResult !== FALSE) 
+			// {
+			// 	echo "<p>Successful.</p>";
+			// } 
+			// else{
+			// 	echo "<p>Failed.</p>";
+			// }
+		// Check for validation
 		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']) && validstName($_POST['streetname']) && validpickupDate($_POST['pickupdate']) && validpickupTime($_POST['pickuptime']))
 		{
 			echo "<h1> Thank you for your booking!</h1>";
@@ -33,22 +59,22 @@
 			$pickupDate = $_POST['pickupdate'];
 			$pickupTime = $_POST['pickuptime'];
 
-			// $insert_sql = "INSERT INTO bookingInfo (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
-			// VALUES ('$customerName' , '$phoneNumber', '$unitNumber'. '$streetNumber', '$');"
-
 			// sleep for 3 seconds to slow server response down
 			sleep(3);
-			// write back the password concatenated to end of the name
-			echo "<p> Customer Name: $customerName. </br> 
-			Phone Number: $phoneNumber.</br>
-			Unit Number $unitNumber.</br>
-			Street Number $streetNumber.</br>
-			Street Name $streetName.</br>
-			Subrub $suburbName.</br>
-			Desintation Subrub $desintationSuburb.</br>
-			pickup Date: $pickupDate.</br>
-			pickup Time $pickupTime.</br>
-			 </p>";
+
+			 $insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
+			 VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
+ 
+ 			echo $insert_sql;
+
+			$insertingResult = @mysqli_query($conn, $insert_sql);
+			if ($insertingResult !== FALSE) 
+			{
+				echo "<p>Successful.</p>";
+			} 
+			else{
+				echo "<p>Failed.</p>";
+			}
 		}
 	}
 
