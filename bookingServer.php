@@ -17,8 +17,8 @@
 	else
 	{
 		echo "<p>Connect to database successful</p>";
-
-		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']) && validpickupDate($_POST['pickupdate']) && validpickupTime($_POST['pickuptime']))
+		//Check for validation
+		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']) && validstName($_POST['streetname']) && validpickupDate($_POST['pickupdate']) && validpickupTime($_POST['pickuptime']))
 		{
 			echo "<h1> Thank you for your booking!</h1>";
 
@@ -27,10 +27,14 @@
 			$phoneNumber = $_POST['phone'];
 			$unitNumber = $_POST['unitnumber'];
 			$streetNumber = $_POST['streetnumber'];
+			$streetName = $_POST['streetname'];
 			$suburbName = $_POST['suburb'];
 			$desintationSuburb = $_POST['destinationsuburb'];
 			$pickupDate = $_POST['pickupdate'];
 			$pickupTime = $_POST['pickuptime'];
+
+			// $insert_sql = "INSERT INTO bookingInfo (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
+			// VALUES ('$customerName' , '$phoneNumber', '$unitNumber'. '$streetNumber', '$');"
 
 			// sleep for 3 seconds to slow server response down
 			sleep(3);
@@ -39,6 +43,7 @@
 			Phone Number: $phoneNumber.</br>
 			Unit Number $unitNumber.</br>
 			Street Number $streetNumber.</br>
+			Street Name $streetName.</br>
 			Subrub $suburbName.</br>
 			Desintation Subrub $desintationSuburb.</br>
 			pickup Date: $pickupDate.</br>
@@ -119,10 +124,10 @@
 	}
 
 	//Street name Validation
-	function validsName($sname)
+	function validstName($stname)
 	{
 	    //Checks if the date is null or empty.
-		if (empty($sname) || !isset($sname) || $sname = " ") 
+		if (empty($stname) || !isset($stname)) 
 		{
 			echo "<p>Please enter a street name.</p>";
 			return false;
@@ -131,7 +136,7 @@
 		{
 			$pattern = "/^[a-zA-Z\s]*$/";
 			//Street name should only contain characters and space.
-			if(preg_match($pattern, $sname))
+			if(preg_match($pattern, $stname))
 			{
 				return true;
 			}
@@ -154,7 +159,6 @@
         }
            return true;        
     }
-
 
     //Pick up time validation.
     function validpickupTime($time)
