@@ -28,7 +28,7 @@
 
 			//Posts the variables
 			$customerName = $_POST['name'];
-			$phoneNumber = $_POST['phone'];
+			$phoneNumber = $_POST['phone']; //Need to change the database to varchar
 			$unitNumber = $_POST['unitnumber']; //Need to change the database to varchar
 			$streetNumber = $_POST['streetnumber'];
 			$streetName = $_POST['streetname'];
@@ -71,8 +71,8 @@
 					while($lrow = mysqli_fetch_assoc($latestResults))
 					{
 						echo "<tr><th>Booking Reference Number: </th> <td>",$BRNString . $lrow["ReferNumber"],"</td></tr>";
-						echo "<tr><th>PickupDate: </th><td>",$lrow["PickupDate"],"</td></tr>";
-						echo "<tr><th>PickupTime: </th><td>",$lrow["PickupTime"],"</td></tr>";
+						echo "<tr><th>PickupTime: </th><td>",date("G:i", strtotime($lrow["PickupTime"])),"</td></tr>";
+						echo "<tr><th>PickupDate: </th><td>",date('d/m/Y', strtotime($lrow["PickupDate"])),"</td></tr>";
 					}
 				}
 			}
