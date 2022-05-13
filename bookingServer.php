@@ -40,21 +40,16 @@
 			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
 			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
  
-			echo $refereNumber;
- 			// echo $insert_sql;
-
-			// insertingQuery($conn, $insert_sql);
-
-			// //Executing the insert query
-			// $insertingResult = @mysqli_query($conn, $insert_sql);
-			// //Validation results
-			// if ($insertingResult !== FALSE) 
-			// {
-			// 	echo "<p>Successful.</p>";
-			// } 
-			// else{
-			// 	echo "<p>Failed.</p>";
-			// }
+			//Executing the insert query
+			$insertingResult = @mysqli_query($conn, $insert_sql);
+			//Validation results
+			if ($insertingResult !== FALSE) 
+			{
+				echo "<p>Successful.</p>";
+			} 
+			else{
+				echo "<p>Failed.</p>";
+			}
 
 			//Retreiving the latest query
 			$latest_refNumber_query = "SELECT * FROM $sql_tble ORDER BY ReferNumber DESC LIMIT 1";
