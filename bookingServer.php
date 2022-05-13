@@ -17,32 +17,7 @@
 	else
 	{
 		echo "<p>Connect to database successful</p>";
-
-			// sleep(3);
-
-			// $customerName = $_POST['name'];
-			// $phoneNumber = $_POST['phone'];
-			// $unitNumber = $_POST['unitnumber'];
-			// $streetNumber = $_POST['streetnumber'];
-			// $streetName = $_POST['streetname'];
-			// $suburbName = $_POST['suburb'];
-			// $desintationSuburb = $_POST['destinationsuburb'];
-			// $pickupDate = $_POST['pickupdate'];
-			// $pickupTime = $_POST['pickuptime'];
-
-			//  $insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
-			//  VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
-
-			// echo $insert_sql;
-
-			// $insertingResult = @mysqli_query($conn, $insert_sql);
-			// if ($insertingResult !== FALSE) 
-			// {
-			// 	echo "<p>Successful.</p>";
-			// } 
-			// else{
-			// 	echo "<p>Failed.</p>";
-			// }
+		
 		// Check for validation
 		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']) && validstName($_POST['streetname']) && validpickupDate($_POST['pickupdate']) && validpickupTime($_POST['pickuptime']))
 		{
@@ -62,26 +37,74 @@
 			// sleep for 3 seconds to slow server response down
 			sleep(3);
 
-			 $insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
-			 VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
+			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
+			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
  
- 			echo $insert_sql;
+			echo $refereNumber;
+ 			// echo $insert_sql;
 
-			insertingQuery($conn, $insert_sql);
+			// insertingQuery($conn, $insert_sql);
+
+			// //Executing the insert query
+			// $insertingResult = @mysqli_query($conn, $insert_sql);
+			// //Validation results
+			// if ($insertingResult !== FALSE) 
+			// {
+			// 	echo "<p>Successful.</p>";
+			// } 
+			// else{
+			// 	echo "<p>Failed.</p>";
+			// }
+
+			//Retreiving the latest query
+			$latest_refNumber_query = "SELECT * FROM $sql_tble ORDER BY ReferNumber DESC LIMIT 1";
+			//Getting the max reference number
+			$refereNumber_query = "SELECT MAX(ReferNumber) AS latestRefer FROM $sql_tble";
+			$BRNString = "BRN00000";
+
+			//Get the latest insert values
+			$latestResults = @mysqli_query($conn, $latest_refNumber_query);
+			$referenceNumber = @mysqli_query($conn, $refereNumber_query);
+			
+			if($latestResults != FALSE && $referenceNumber != FALSE)
+			{
+				//Interating through the max value of reference number
+				while($referRow =  mysqli_fetch_assoc($referenceNumber))
+				{
+					$BRN = substr($BRNString , 0, strlen($BRNString) - strlen($referRow['latestRefer']));
+					//Interating through the latest row
+					while($lrow = mysqli_fetch_assoc($latestResults))
+					{
+						echo "<tr><th>ReferNumber: </th> <td>",$BRNString . $lrow["ReferNumber"],"</td></tr>";
+						echo "<tr><th>CustomerName: </th><td>",$lrow["CustomerName"],"</td></tr>";
+						echo "<tr><th>PhoneNumber: </th><td>",$lrow["PhoneNumber"],"</td></tr>";
+						echo "<tr><th>UnitNumber: </th><td>",$lrow["UnitNumber"],"</td></tr>";
+						echo "<tr><th>StreetNumber: </th><td>",$lrow["StreetNumber"],"</td></tr>";
+						echo "<tr><th>StreetName: </th><td>",$lrow["StreetName"],"</td></tr>";
+						echo "<tr><th>Suburb: </th><td>",$lrow["Suburb"],"</td></tr>";
+						echo "<tr><th>DestinationSuburb: </th><td>",$lrow["DestinationSuburb"],"</td></tr>";
+						echo "<tr><th>PickupDate: </th><td>",$lrow["PickupDate"],"</td></tr>";
+						echo "<tr><th>PickupTime: </th><td>",$lrow["PickupTime"],"</td></tr>";
+					}
+				}
+			}
 		}
 	}
 
-	function insertingQuery($conn, $insert_sql)
-	{
-		$insertingResult = @mysqli_query($conn, $insert_sql);
-		if ($insertingResult !== FALSE) 
-		{
-			echo "<p>Successful.</p>";
-		} 
-		else{
-			echo "<p>Failed.</p>";
-		}
-	}
+	// //Inserting data into the database
+	// function insertingQuery($conn, $insert_sql)
+	// {
+	// 	//Executing the insert query
+	// 	$insertingResult = @mysqli_query($conn, $insert_sql);
+	// 	//Validation results
+	// 	if ($insertingResult !== FALSE) 
+	// 	{
+	// 		echo "<p>Successful.</p>";
+	// 	} 
+	// 	else{
+	// 		echo "<p>Failed.</p>";
+	// 	}
+	// }
 
 	//Customer name validation.
 	function validcname($name)
