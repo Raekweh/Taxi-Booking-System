@@ -53,6 +53,8 @@
 
     			//Executing the insert query
 				$insertingResult = @mysqli_query($conn, $insert_sql);
+
+				displayingBRN($conn, $latest_refNumber_query, $refereNumber_query);
 			} 
 			else
 			{
@@ -60,41 +62,43 @@
 				$creatingTableResult = @mysqli_query($conn,$creatingTable);
 				if($creatingTableResult !== FALSE)
 				{
-					echo "<p>Databse is created/p>";
 					$insertingResult = @mysqli_query($conn, $insert_sql);
-
+					displayingBRN($conn, $latest_refNumber_query, $refereNumber_query);
 				}
 				else{
 					echo "<p>SOmething went wrong</p>";
 				}
 			}
+		}
+	}
 
+	//Displaying the booking reference number & information
+	function displayingBRN($conn, $latest_refNumber_query, $refereNumber_query)
+	{
+		$BRNString = "BRN00000";
 
-			$BRNString = "BRN00000";
-
-			//Get the latest insert values
-			$latestResults = @mysqli_query($conn, $latest_refNumber_query);
-			$referenceNumber = @mysqli_query($conn, $refereNumber_query);
-			
-			echo "<table>";
-			//Getting information of the latest insert
-			if($latestResults != FALSE && $referenceNumber != FALSE)
+		//Get the latest insert values
+		$latestResults = @mysqli_query($conn, $latest_refNumber_query);
+		$referenceNumber = @mysqli_query($conn, $refereNumber_query);
+		
+		echo "<table>";
+		//Getting information of the latest insert
+		if($latestResults != FALSE && $referenceNumber != FALSE)
+		{
+			//Interating through the max value of reference number
+			while($referRow =  mysqli_fetch_assoc($referenceNumber))
 			{
-				//Interating through the max value of reference number
-				while($referRow =  mysqli_fetch_assoc($referenceNumber))
+				$BRN = substr($BRNString , 0, strlen($BRNString) - strlen($referRow['latestRefer']));
+				//Interating through the latest row
+				while($lrow = mysqli_fetch_assoc($latestResults))
 				{
-					$BRN = substr($BRNString , 0, strlen($BRNString) - strlen($referRow['latestRefer']));
-					//Interating through the latest row
-					while($lrow = mysqli_fetch_assoc($latestResults))
-					{
-						echo "<tr><th>Booking Reference Number: </th> <td>",$BRNString . $lrow["ReferNumber"],"</td></tr>";
-						echo "<tr><th>Pickup Time: </th><td>",date("G:i", strtotime($lrow["PickupTime"])),"</td></tr>";
-						echo "<tr><th>Pickup Date: </th><td>",date('d/m/Y', strtotime($lrow["PickupDate"])),"</td></tr>";
-					}
+					echo "<tr><th>Booking Reference Number: </th> <td>",$BRNString . $lrow["ReferNumber"],"</td></tr>";
+					echo "<tr><th>Pickup Time: </th><td>",date("G:i", strtotime($lrow["PickupTime"])),"</td></tr>";
+					echo "<tr><th>Pickup Date: </th><td>",date('d/m/Y', strtotime($lrow["PickupDate"])),"</td></tr>";
 				}
 			}
-			echo "</table>";
 		}
+		echo "</table>";
 	}
 
 	//Customer name validation.
