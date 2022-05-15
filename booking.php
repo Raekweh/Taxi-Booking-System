@@ -37,18 +37,37 @@
 			$pickupDate = $_POST['pickupdate'];
 			$pickupTime = $_POST['pickuptime'];
 
-    		//Inserting Command
-    		$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
-    		VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
+			//Inserting Command
+			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
+			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
 
-			//Executing the insert query
-			$insertingResult = @mysqli_query($conn, $insert_sql);
-			
+			$existenceResults = @mysqli_query($conn, $tableExistence);
+
+			echo $tableExistence;
+
+			echo "<p> YOu are gay</p>";
 			//Validation results (Remove this later)
-			if ($insertingResult !== TRUE) 
+			if ($existenceResults !== FALSE) 
 			{
-				echo "<p>Something went wrong with inserting data into database.</p>";
+				echo "<p>The database exist</p>";
+
+    			//Executing the insert query
+				$insertingResult = @mysqli_query($conn, $insert_sql);
 			} 
+			else
+			{
+				echo "<p>THe databse does not exist and is being created</p>";
+				$creatingTableResult = @mysqli_query($conn,$creatingTable);
+				if($creatingTableResult !== FALSE)
+				{
+					echo "<p>Databse is created/p>";
+					$insertingResult = @mysqli_query($conn, $insert_sql);
+
+				}
+				else{
+					echo "<p>SOmething went wrong</p>";
+				}
+			}
 
 
 			$BRNString = "BRN00000";
