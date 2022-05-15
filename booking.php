@@ -16,7 +16,7 @@
 	}
 	else
 	{
-		echo "<p>Connect to database successful</p>";
+		echo "<p>Connect to database successful</p>"; //Need to get rid of this comment
 		
 		// sleep for 3 seconds to slow server response down
 		sleep(3);
@@ -37,9 +37,10 @@
 			$pickupDate = $_POST['pickupdate'];
 			$pickupTime = $_POST['pickuptime'];
 
-			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
-			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
- 
+    		//Inserting Command
+    		$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
+    		VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
+
 			//Executing the insert query
 			$insertingResult = @mysqli_query($conn, $insert_sql);
 			
@@ -49,10 +50,7 @@
 				echo "<p>Something went wrong with inserting data into database.</p>";
 			} 
 
-			//Retreiving the latest query
-			$latest_refNumber_query = "SELECT * FROM $sql_tble ORDER BY ReferNumber DESC LIMIT 1";
-			//Getting the max reference number
-			$refereNumber_query = "SELECT MAX(ReferNumber) AS latestRefer FROM $sql_tble";
+
 			$BRNString = "BRN00000";
 
 			//Get the latest insert values

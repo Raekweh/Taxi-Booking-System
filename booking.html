@@ -3,7 +3,7 @@
 <html>
 <head>
     <script type="text/javascript" src="xhr.js"></script>
-    <script type="text/javascript" src="bookingComponents/bookingData.js"> </script>
+    <script type="text/javascript" src="bookingComponents/booking.js"> </script>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 </head>
 
@@ -28,7 +28,7 @@
                 <label><br>Pick-up Time: <input type="time" name="time">  <br><br> </label>
 
                <input name="submit" type = "button"
-                onClick = "getData('bookingServer.php','content', cname.value, phone.value, unumber.value, snumber.value, stname.value ,sbname.value, dsbname.value, date.value, time.value) " 
+                onClick = "getData('booking.php','content', cname.value, phone.value, unumber.value, snumber.value, stname.value ,sbname.value, dsbname.value, date.value, time.value) " 
                 value = "Fetch from server">
        
             </form>
