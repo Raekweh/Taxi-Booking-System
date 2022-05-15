@@ -43,14 +43,9 @@
 
 			$existenceResults = @mysqli_query($conn, $tableExistence);
 
-			echo $tableExistence;
-
-			echo "<p> YOu are gay</p>";
-			//Validation results (Remove this later)
+			//Checking if table exist
 			if ($existenceResults !== FALSE) 
 			{
-				echo "<p>The database exist</p>";
-
     			//Executing the insert query
 				$insertingResult = @mysqli_query($conn, $insert_sql);
 
@@ -58,15 +53,11 @@
 			} 
 			else
 			{
-				echo "<p>THe databse does not exist and is being created</p>";
 				$creatingTableResult = @mysqli_query($conn,$creatingTable);
 				if($creatingTableResult !== FALSE)
 				{
 					$insertingResult = @mysqli_query($conn, $insert_sql);
 					displayingBRN($conn, $latest_refNumber_query, $refereNumber_query);
-				}
-				else{
-					echo "<p>SOmething went wrong</p>";
 				}
 			}
 		}
