@@ -20,6 +20,8 @@
         DestinationSuburb VARCHAR(50),
         PickupDate DATE NOT NULL,
         PickupTime TIME NOT NULL,
+        Status VARCHAR(15) NOT NULL,
+        Assign VARCHAR(15),
         PRIMARY KEY (ReferNumber)
         )";
 
