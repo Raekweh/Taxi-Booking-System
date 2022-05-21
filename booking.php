@@ -16,16 +16,12 @@
 	}
 	else
 	{
-		echo "<p>Connect to database successful</p>"; //Need to get rid of this comment
-		
 		// sleep for 3 seconds to slow server response down
 		sleep(3);
 
 		// Check for validation
 		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']) && validstName($_POST['streetname']) && validpickupDate($_POST['pickupdate']) && validpickupTime($_POST['pickuptime']))
 		{
-			echo "<h1> Thank you for your booking!</h1>";
-
 			//Posts the variables
 			$customerName = $_POST['name'];
 			$phoneNumber = $_POST['phone']; //Need to change the database to varchar
@@ -43,14 +39,9 @@
 
 			$existenceResults = @mysqli_query($conn, $tableExistence);
 
-			echo $tableExistence;
-
-			echo "<p> YOu are gay</p>";
-			//Validation results (Remove this later)
+			//Validation results
 			if ($existenceResults !== FALSE) 
 			{
-				echo "<p>The database exist</p>";
-
     			//Executing the insert query
 				$insertingResult = @mysqli_query($conn, $insert_sql);
 
@@ -58,7 +49,6 @@
 			} 
 			else
 			{
-				echo "<p>THe databse does not exist and is being created</p>";
 				$creatingTableResult = @mysqli_query($conn,$creatingTable);
 				if($creatingTableResult !== FALSE)
 				{
@@ -85,6 +75,7 @@
 		//Getting information of the latest insert
 		if($latestResults != FALSE && $referenceNumber != FALSE)
 		{
+			echo "<h1> Thank you for your booking!</h1>";
 			//Interating through the max value of reference number
 			while($referRow =  mysqli_fetch_assoc($referenceNumber))
 			{
@@ -197,7 +188,7 @@
 		}
 	}
 
-    //Pick up date validation.
+    //Pick up date validation. //Need a condition to check if the date is after the current date
     function validpickupDate($date)
     {
         //Checks if the date is null or empty.
@@ -209,7 +200,7 @@
            return true;        
     }
 
-    //Pick up time validation.
+    //Pick up time validation. //Need to add acondition to check if the time is after the current time
     function validpickupTime($time)
     {
         //Checks if the date is null or empty.
