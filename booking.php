@@ -191,24 +191,40 @@
     //Pick up date validation. //Need a condition to check if the date is after the current date
     function validpickupDate($date)
     {
+		//Getting the current date
+		$currentDate = date("Y-m-d");
         //Checks if the date is null or empty.
         if (empty($date) || !isset($date)) 
         {
             echo "<p>Please insert a pick up date</p>";
             return false;
         }
-           return true;        
+		else
+		{
+			//Checks if the date is the current or future date
+			if(strtotime($date) >= strtotime($currentDate))
+			{
+				return true;
+			}
+			else
+			{
+				echo "<p>Please select a date from $currentDate onwards</p>";
+				return false;
+			}		
+		}
     }
 
     //Pick up time validation. //Need to add acondition to check if the time is after the current time
     function validpickupTime($time)
     {
+		$currentDate = date("Y/m/d");
         //Checks if the date is null or empty.
         if (empty($time) || !isset($time)) 
         {
             echo "<p>Pleaes insert a pick up time</p>";
             return false;
         }
+
         return true;
     }
 ?>
