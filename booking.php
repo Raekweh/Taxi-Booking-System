@@ -56,9 +56,6 @@
 					$insertingResult = @mysqli_query($conn, $insert_sql);
 					displayingBRN($conn, $latest_refNumber_query, $refereNumber_query);
 				}
-				else{
-					echo "<p>SOmething went wrong</p>";
-				}
 			}
 		}
 	}
