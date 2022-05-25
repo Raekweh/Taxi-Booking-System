@@ -33,6 +33,7 @@
 			$pickupDate = $_POST['pickupdate'];
 			$pickupTime = $_POST['pickuptime'];
 
+			echo "The pick up time is : $pickupTime";
 			//Inserting Command
 			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime, Status)
 			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime', 'Unassigned')";
@@ -217,14 +218,26 @@
     //Pick up time validation. //Need to add acondition to check if the time is after the current time
     function validpickupTime($time)
     {
-		$currentDate = date("Y/m/d");
+    	$currentTime = date("H:i");
         //Checks if the date is null or empty.
         if (empty($time) || !isset($time)) 
         {
-            echo "<p>Pleaes insert a pick up time</p>";
+            echo "<p>Please insert a pick up date</p>";
             return false;
         }
-
-        return true;
+        else
+        {
+			//Checks if the time inserted is after the current time
+                if(strtotime($time) >= strtotime($currentTime))
+                {
+					echo "<p>This is working somehow </p>";
+                	return true;
+                }
+                else
+                {
+                	echo "<p>Please select a time before the current time $currentTime</p>";
+                	return false;
+                }
+        }
     }
 ?>
