@@ -78,6 +78,7 @@
 			while($referRow =  mysqli_fetch_assoc($referenceNumber))
 			{
 				$BRN = substr($BRNString , 0, strlen($BRNString) - strlen($referRow['latestRefer']));
+
 				//Interating through the latest row
 				while($lrow = mysqli_fetch_assoc($latestResults))
 				{
@@ -130,6 +131,7 @@
 			if(strlen($phone)>=10 && strlen($phone)<=12)
 			{
 				$pattern = "/^[0-9]*$/";
+				//Check if the phone number only contains numbers
 				if(preg_match($pattern,$phone))
 				{
 					return true;
@@ -212,9 +214,10 @@
 		}
     }
 
-    //Pick up time validation. //Need to add acondition to check if the time is after the current time
+    //Pick up time validation.
     function validpickupTime($time)
     {
+		//Get the current time
     	$currentTime = date("H:i");
         //Checks if the date is null or empty.
         if (empty($time) || !isset($time)) 
@@ -225,16 +228,15 @@
         else
         {
 			//Checks if the time inserted is after the current time
-                if(strtotime($time) >= strtotime($currentTime))
-                {
-					echo "<p>This is working somehow </p>";
-                	return true;
-                }
-                else
-                {
-                	echo "<p>Please select a time before the current time $currentTime</p>";
-                	return false;
-                }
+            if(strtotime($time) >= strtotime($currentTime))
+            {
+            	return true;
+            }
+            else
+            {
+            	echo "<p>Please select a time before the current time $currentTime</p>";
+            	return false;
+            }
         }
     }
 ?>
