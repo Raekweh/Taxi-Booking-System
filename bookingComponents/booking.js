@@ -1,6 +1,6 @@
 //
 var xhr = createRequest();
-function getData(dataSource, divID, cname, mphone, unumber, snumber, stname,sbname, dsbname, pdate, ptime) {
+function bookingData(dataSource, divID, cname, mphone, unumber, snumber, stname,sbname, dsbname, pdate, ptime) {
   if (xhr) {
     var obj = document.getElementById(divID);
     var requestbody = "name=" + encodeURIComponent(cname) + "&phone=" + encodeURIComponent(mphone)

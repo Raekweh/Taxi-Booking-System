@@ -33,7 +33,6 @@
 			$pickupDate = $_POST['pickupdate'];
 			$pickupTime = $_POST['pickuptime'];
 
-			echo "The pick up time is : $pickupTime";
 			//Inserting Command
 			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime, Status)
 			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime', 'Unassigned')";
