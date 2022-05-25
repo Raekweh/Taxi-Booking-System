@@ -16,16 +16,12 @@
 	}
 	else
 	{
-		echo "<p>Connect to database successful</p>"; //Need to get rid of this comment
-		
 		// sleep for 3 seconds to slow server response down
 		sleep(3);
 
 		// Check for validation
 		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']) && validstName($_POST['streetname']) && validpickupDate($_POST['pickupdate']) && validpickupTime($_POST['pickuptime']))
 		{
-			echo "<h1> Thank you for your booking!</h1>";
-
 			//Posts the variables
 			$customerName = $_POST['name'];
 			$phoneNumber = $_POST['phone']; //Need to change the database to varchar
@@ -37,13 +33,14 @@
 			$pickupDate = $_POST['pickupdate'];
 			$pickupTime = $_POST['pickuptime'];
 
+			echo "The pick up time is : $pickupTime";
 			//Inserting Command
-			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime)
-			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime')";
+			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime, Status)
+			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime', 'Unassigned')";
 
 			$existenceResults = @mysqli_query($conn, $tableExistence);
 
-			//Checking if table exist
+			//Validation results
 			if ($existenceResults !== FALSE) 
 			{
     			//Executing the insert query
@@ -76,6 +73,7 @@
 		//Getting information of the latest insert
 		if($latestResults != FALSE && $referenceNumber != FALSE)
 		{
+			echo "<h1> Thank you for your booking!</h1>";
 			//Interating through the max value of reference number
 			while($referRow =  mysqli_fetch_assoc($referenceNumber))
 			{
@@ -188,27 +186,55 @@
 		}
 	}
 
-    //Pick up date validation.
+    //Pick up date validation. //Need a condition to check if the date is after the current date
     function validpickupDate($date)
     {
+		//Getting the current date
+		$currentDate = date("Y-m-d");
         //Checks if the date is null or empty.
         if (empty($date) || !isset($date)) 
         {
             echo "<p>Please insert a pick up date</p>";
             return false;
         }
-           return true;        
+		else
+		{
+			//Checks if the date is the current or future date
+			if(strtotime($date) >= strtotime($currentDate))
+			{
+				return true;
+			}
+			else
+			{
+				echo "<p>Please select a date from $currentDate onwards</p>";
+				return false;
+			}		
+		}
     }
 
-    //Pick up time validation.
+    //Pick up time validation. //Need to add acondition to check if the time is after the current time
     function validpickupTime($time)
     {
+    	$currentTime = date("H:i");
         //Checks if the date is null or empty.
         if (empty($time) || !isset($time)) 
         {
-            echo "<p>Pleaes insert a pick up time</p>";
+            echo "<p>Please insert a pick up date</p>";
             return false;
         }
-        return true;
+        else
+        {
+			//Checks if the time inserted is after the current time
+                if(strtotime($time) >= strtotime($currentTime))
+                {
+					echo "<p>This is working somehow </p>";
+                	return true;
+                }
+                else
+                {
+                	echo "<p>Please select a time before the current time $currentTime</p>";
+                	return false;
+                }
+        }
     }
 ?>

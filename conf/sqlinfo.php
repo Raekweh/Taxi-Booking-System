@@ -8,7 +8,7 @@
 
     //Existence of table
     $tableExistence = "SELECT 1 FROM $sql_tble";
-    //Creating table
+    //Creating table. Need to add status and assign
     $creatingTable = "CREATE TABLE $sql_tble(
         ReferNumber INT AUTO_INCREMENT NOT NULL,
         CustomerName VARCHAR(30) NOT NULL,
@@ -20,6 +20,8 @@
         DestinationSuburb VARCHAR(50),
         PickupDate DATE NOT NULL,
         PickupTime TIME NOT NULL,
+        Status VARCHAR(15) NOT NULL,
+        Assign VARCHAR(15),
         PRIMARY KEY (ReferNumber)
         )";
 
