@@ -3,7 +3,7 @@ var xhr = createRequest();
 function adminData(dataSource, divID, bsearch) {
   if (xhr) {
     var obj = document.getElementById(divID);
-    var requestbody = "bookingSearch=" + encodeURIComponent(bsearch);
+    var requestbody = "bookingsearch=" + encodeURIComponent(bsearch);
     xhr.open("POST", dataSource, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
