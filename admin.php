@@ -16,33 +16,35 @@
         sleep (3);
         echo "<p>Database connection is successful</p>";
 
-        if(validBRN($_POST['bookingsearch']))
+
+        //COndition to check if the string is enpmty
+        if(empty($_POST['bookingsearch']) || !isset($$_POST['bookingsearch']) || $$_POST['bookingsearch'] == " ")  
+        {
+            echo "<p>Empty String</p>";
+          //Search for all within 2 hrs
+            //Search based of unsigned
+        }
+        else if(validBRN($_POST['bookingsearch']))
         {
             $bookingSearch = $_POST['bookingsearch'];
             echo "The booking search is: ".$bookingSearch;
+            //Find the exact booking number reference
+                //Probably use a find the brn using the last numbers idk use a forloop
+        }
+        else{
+            echo "<p>Please input in the booking number in the format BRN00000.</p>";
         }
     }
 
     //Checking if the user inputs the bookking number reference in the correct format.
     function validBRN($bookingNumber)
     {
-        if(empty($bookingNumber) || !isset($bookingNumber))
+        $pattern = "/BRN+[0-9]{5}/";
+        if(preg_match($pattern, $bookingNumber))
         {
-            echo "<p>No Records of Booking Number.</p>";
-            return false;
+            return true;
         }
-        else{
-            $pattern = "/BRN+[0-9]{5}/";
-
-            if(preg_match($pattern, $bookingNumber))
-            {
-                return true;
-            }
-            else
-            {
-                echo "<p>Please input in the booking number in the format BRN00000.</p>";
-                return false;
-            }
-        }
+        return false;
     }
+
 ?>
