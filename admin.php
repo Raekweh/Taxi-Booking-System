@@ -55,15 +55,15 @@
                 </tr>";
                 while($row = mysqli_fetch_assoc($searchResults))
                 {
-                    echo "<tr><td>",$row["ReferNumber"],"</td>";
+                    echo "<tr><td>",$bookingSearch,"</td>";
                     echo "<td>",$row["CustomerName"],"</td>";
                     echo "<td>",$row["PhoneNumber"],"</td>";
                     echo "<td>",$row["UnitNumber"],"</td>";
                     echo "<td>",$row["StreetNumber"],"</td>";
                     echo "<td>",$row["StreetName"],"</td>";
                     echo "<td>",$row["DestinationSuburb"],"</td>";
-                    echo "<td>",$row["PickupDate"],"</td>";
-                    echo "<td>",$row["PickupTime"],"</td>";
+                    echo "<td>",date('d/m/Y', strtotime($row['PickupDate'])),"</td>";
+                    echo "<td>",date("G:i", strtotime($row["PickupTime"])),"</td>";
                     echo "<td>",$row["Status"],"</td>";
                     echo "<td><input type='button' name ='changeAssigned' value='Assign'></td></tr>";
                 }
