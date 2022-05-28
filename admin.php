@@ -44,10 +44,30 @@
             if($searchResults)
             {
                 echo "<p> This is working fine I just need to dfisplay the results</p>";
+                echo "<table width='100%' border='1'>";
+                echo "<tr>
+                <th>Booking Reference Number</th><th>Customer Name</th>
+                <th>Phone Number</th> <th>Unit Number</th>
+                <th>Street Number</th> <th>Street Name</th>
+                <th>Destination Suburb</th> <th>Pickup Date</th> 
+                <th>Pickup Time</th> <th>Status</th> 
+                <th>Assigned</th> 
+                </tr>";
                 while($row = mysqli_fetch_assoc($searchResults))
                 {
-                    echo "<tr><th>Code: </th> <td>",$row["ReferNumber"],"</td></tr>";
+                    echo "<tr><td>",$row["ReferNumber"],"</td>";
+                    echo "<td>",$row["CustomerName"],"</td>";
+                    echo "<td>",$row["PhoneNumber"],"</td>";
+                    echo "<td>",$row["UnitNumber"],"</td>";
+                    echo "<td>",$row["StreetNumber"],"</td>";
+                    echo "<td>",$row["StreetName"],"</td>";
+                    echo "<td>",$row["DestinationSuburb"],"</td>";
+                    echo "<td>",$row["PickupDate"],"</td>";
+                    echo "<td>",$row["PickupTime"],"</td>";
+                    echo "<td>",$row["Status"],"</td>";
+                    echo "<td><input type='button' name ='changeAssigned' value='Assign'></td></tr>";
                 }
+                echo "</table>";
             }
             else{
                 echo "<p>THis is not working I hate my life</p>";
