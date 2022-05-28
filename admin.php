@@ -40,38 +40,9 @@
             $searchQuery = "SELECT * FROM $sql_tble WHERE ReferNumber = $bookingNumber";
 
             $searchResults = @mysqli_query($conn,$searchQuery);
-            //Checking if results work
-            if($searchResults)
-            {
-                echo "<p> This is working fine I just need to dfisplay the results</p>";
-                echo "<table width='100%' border='1'>";
-                echo "<tr>
-                <th>Booking Reference Number</th><th>Customer Name</th>
-                <th>Phone Number</th> <th>Unit Number</th>
-                <th>Street Number</th> <th>Street Name</th>
-                <th>Destination Suburb</th> <th>Pickup Date</th> 
-                <th>Pickup Time</th> <th>Status</th> 
-                <th>Assigned</th> 
-                </tr>";
-                while($row = mysqli_fetch_assoc($searchResults))
-                {
-                    echo "<tr><td>",$bookingSearch,"</td>";
-                    echo "<td>",$row["CustomerName"],"</td>";
-                    echo "<td>",$row["PhoneNumber"],"</td>";
-                    echo "<td>",$row["UnitNumber"],"</td>";
-                    echo "<td>",$row["StreetNumber"],"</td>";
-                    echo "<td>",$row["StreetName"],"</td>";
-                    echo "<td>",$row["DestinationSuburb"],"</td>";
-                    echo "<td>",date('d/m/Y', strtotime($row['PickupDate'])),"</td>";
-                    echo "<td>",date("G:i", strtotime($row["PickupTime"])),"</td>";
-                    echo "<td>",$row["Status"],"</td>";
-                    echo "<td><input type='button' name ='changeAssigned' value='Assign'></td></tr>";
-                }
-                echo "</table>";
-            }
-            else{
-                echo "<p>THis is not working I hate my life</p>";
-            }
+
+            //Display the table
+            displayTable($searchResults, $bookingSearch);
 
             //Find the exact booking number reference
                 //Probably use a find the brn using the last numbers idk use a forloop
@@ -83,7 +54,34 @@
     }
 
     //Create a function which display
-
+    function displayTable($searchResults, $bookingSearch)
+    {
+        if($searchResults)
+        {
+            echo "<table width='100%' border='1'>";
+            echo "<tr>
+            <th>Booking Reference Number</th><th>Customer Name</th><th>Phone Number</th>
+            <th>Unit Number</th><th>Street Number</th> <th>Street Name</th>
+            <th>Destination Suburb</th> <th>Pickup Date</th><th>Pickup Time</th>
+            <th>Status</th><th>Assigned</th> 
+            </tr>";
+            while($row = mysqli_fetch_assoc($searchResults))
+            {
+                echo "<tr><td>",$bookingSearch,"</td>";
+                echo "<td>",$row["CustomerName"],"</td>";
+                echo "<td>",$row["PhoneNumber"],"</td>";
+                echo "<td>",$row["UnitNumber"],"</td>";
+                echo "<td>",$row["StreetNumber"],"</td>";
+                echo "<td>",$row["StreetName"],"</td>";
+                echo "<td>",$row["DestinationSuburb"],"</td>";
+                echo "<td>",date('d/m/Y', strtotime($row['PickupDate'])),"</td>";
+                echo "<td>",date("G:i", strtotime($row["PickupTime"])),"</td>";
+                echo "<td>",$row["Status"],"</td>";
+                echo "<td><input type='button' name ='changeAssigned' value='Assign'></td></tr>";
+            }
+            echo "</table>";
+        }
+    }
     //Checking if the user inputs the bookking number reference in the correct format.
     function validBRN($bookingNumber)
     {
