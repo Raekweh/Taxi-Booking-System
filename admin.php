@@ -18,34 +18,51 @@
 
         $searchQuery = "";
 
-        //COndition to check if the string is enpmty
-        if(empty($_POST['bookingsearch']) || !isset($_POST['bookingsearch']) || $_POST['bookingsearch'] == " ")  
+        //Checks if the booking search input is null
+        if(isset($_POST['bookingsearch']))  
         {
-            echo "<p>Empty String</p>";
-            $searchQuery = mysqli_query("");
-            //Search for all within 2 hrs
-                //Search based of unsigned
-        }
-        else if(validBRN($_POST['bookingsearch']))
-        {
+            //Converting the booking number to an integer
             $bookingSearch = $_POST['bookingsearch'];
-            echo "The booking search is: ".$bookingSearch;
-
-            //COnverting the booking number to an integer
             $subString = substr($bookingSearch,3);
             $bookingNumber = (int) $subString;
-            echo "THe booking Number is $bookingNumber";
 
-            //Finding the Reference Number
-            $searchQuery = "SELECT * FROM $sql_tble WHERE ReferNumber = $bookingNumber";
+            //Checks if the booking reference bunmber is in the correct format
+            if(validBRN($_POST['bookingsearch']))
+            {
+                echo "<p>The BRN is in the correct format</p>";
+                //Finding the Reference Number
+                $searchQuery = "SELECT * FROM $sql_tble WHERE ReferNumber = $bookingNumber";
+    
+                $searchResults = @mysqli_query($conn,$searchQuery);
+    
+                //Display the table
+                displayTable($searchResults, $bookingSearch);
+            }
+            //Checks if the booking reference is empty or a space
+            else if(empty($_POST['bookingsearch'])  || $_POST['bookingsearch'] == " ")
+            {
+                echo "<p>Empty String</p>";
+                $currentTime = date("H:i");
+                // echo "<p>The current time is $currentTime </p>";
+                $twoHours = date("H:i",strtotime("2 hours", strtotime($currentTime)));
+                // echo "<p>The current time is $twoHours </p>";
+                $currentDate = date("Y-m-d");
+    
+                //Select the pick up time between current and two hours after
+                $searchQuery = "SELECT * FROM $sql_tble WHERE PickupTime BETWEEN '$currentTime' AND '$twoHours' AND PickupDate = $currentDate";
+                // echo $searchQuery;
+    
+                $searchResults = @mysqli_query($conn, $searchQuery);
+                if(!$searchResults)
+                {
+                    echo "<p>The time period does not work</p>";
 
-            $searchResults = @mysqli_query($conn,$searchQuery);
-
-            //Display the table
-            displayTable($searchResults, $bookingSearch);
-
-            //Find the exact booking number reference
-                //Probably use a find the brn using the last numbers idk use a forloop
+                }
+                else{
+                    echo "<p>The time period is working</p>";
+                    displayTable($searchResults, $bookingSearch);
+                }
+            }
         }
         else{
             echo "<p>Please input in the booking number in the format BRN00000 </br>
@@ -53,11 +70,12 @@
         }
     }
 
-    //Create a function which display
+    //Displays BRN table when admin inserts exact BRN value
     function displayTable($searchResults, $bookingSearch)
     {
         if($searchResults)
         {
+            //Generating a table
             echo "<table width='100%' border='1'>";
             echo "<tr>
             <th>Booking Reference Number</th><th>Customer Name</th><th>Phone Number</th>
@@ -77,7 +95,7 @@
                 echo "<td>",date('d/m/Y', strtotime($row['PickupDate'])),"</td>";
                 echo "<td>",date("G:i", strtotime($row["PickupTime"])),"</td>";
                 echo "<td>",$row["Status"],"</td>";
-                echo "<td><input type='button' name ='changeAssigned' value='Assign'></td></tr>";
+                echo "<td><input type='button' name ='changeAssigned' value='Assign'></td></tr>"; //Need to implement an onclick method to alter the data
             }
             echo "</table>";
         }
