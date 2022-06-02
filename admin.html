@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript" src="xhr.js"></script>
+        <script type="text/javascript" src="adminComponents/admin.js"> </script>
         <link rel = "stylesheet" type = "text/css" href = "style.css" media="screen" />
     </head>
     <body>
@@ -11,10 +13,10 @@
                 </h1>
             </div>
 
-            <div class = "content">
+            <div id = "content">
                 <form >
                     <input type = "text" name = "bsearch" maxlength = "8" placeholder = "BRN00000">
-                    <input type = "submit" name = "sbutton" value = "submit">
+                    <input type = "button" name = "sbutton" value = "Fetch" onClick = "adminData('admin.php', 'content', bsearch.value)">
                 </form>
             </div>
         </div>

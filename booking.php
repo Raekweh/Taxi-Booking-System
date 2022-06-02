@@ -81,8 +81,8 @@
 				//Interating through the latest row
 				while($lrow = mysqli_fetch_assoc($latestResults))
 				{
-					echo "<tr><th>Booking Reference Number: </th> <td>",$BRNString . $lrow["ReferNumber"],"</td></tr>";
-					echo "<tr><th>Pickup Time: </th><td>",date("G:i", strtotime($lrow["PickupTime"])),"</td></tr>";
+					echo "<tr><th>Booking Reference Number: </th> <td>",$BRN . $lrow["ReferNumber"],"</td></tr>";
+					echo "<tr><th>Pickup Time: </th><td>",date("H:i", strtotime($lrow["PickupTime"])),"</td></tr>";
 					echo "<tr><th>Pickup Date: </th><td>",date('d/m/Y', strtotime($lrow["PickupDate"])),"</td></tr>";
 				}
 			}
