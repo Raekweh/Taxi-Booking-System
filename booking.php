@@ -20,7 +20,7 @@
 		sleep(3);
 
 		// Check for validation
-		if(validcname($_POST['name']) && validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']) && validstName($_POST['streetname']) && validpickupDate($_POST['pickupdate']) && validpickupTime($_POST['pickuptime']))
+		if(validPhone($_POST['phone']) && validsNumber($_POST['streetnumber']) && validstName($_POST['streetname']) && validpickupDate($_POST['pickupdate']) && validpickupTime($_POST['pickuptime']))
 		{
 			//Posts the variables
 			$customerName = $_POST['name'];
@@ -88,31 +88,6 @@
 			}
 		}
 		echo "</table>";
-	}
-
-	//Customer name validation.
-	function validcname($name)
-	{
-	    //Checks if the date is null or empty.
-	    if (empty($name) || !isset($name)) 
-	    {
-	        echo "<p>Please enter a name.</p>";
-	        return false;
-	    }
-		else
-		{
-			$pattern = "/^[a-zA-Z\s]*$/";
-			//Name should only contain characters and space.
-			if(preg_match($pattern, $name))
-			{
-				return true;
-			}
-			else
-			{
-				echo "<p>The Customer Name box is incorrect </br>
-				Your name must not include any special character nor numbers</p>";
-			}
-		}
 	}
 	
 	//Phone number validation
