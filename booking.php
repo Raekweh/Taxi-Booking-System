@@ -89,52 +89,6 @@
 		}
 		echo "</table>";
 	}
-	
-	//Phone number validation
-	function validPhone($phone)
-	{
-		//Checks if the phone number is null or empty.
-		if(empty($phone) || !isset($phone))
-		{
-			echo "<p>Please enter a phone number</p>";
-			return false;
-		}
-		else
-		{
-			//Checks if the length of the phone number is between 10 to 12 digits.
-			if(strlen($phone)>=10 && strlen($phone)<=12)
-			{
-				$pattern = "/^[0-9]*$/";
-				if(preg_match($pattern,$phone))
-				{
-					return true;
-				}
-				else
-				{
-					echo "<p>The phone box is incorrect </br>
-					The phone must only contain numbers and 10 to 12 digits long</p>";
-					return false;
-				}
-			}
-			else 
-			{
-				echo "<p> The phone number must be 10 to 12 digits long</p>";
-				return false;
-			}
-		}
-		return false;
-	}
-
-	//Street number validation
-	function validsNumber($snumber)
-	{
-		if(empty($snumber) || !isset($snumber))
-		{
-			echo "<p>Please enter a street number</p>";
-			return false;
-		}
-		return true;
-	}
 
 	//Street name Validation
 	function validstName($stname)

@@ -3,11 +3,7 @@ var xhr = createRequest();
 var name
 function getData(dataSource, divID, cname, mphone, unumber, snumber, stname,sbname, dsbname, pdate, ptime) 
 {
-  var validName = validName(cname);
-  var validPhone = validPhone(mphone);
-
-
-  if(validName && validPhone)
+   if(validName(cname) && validPhone(mphone) && validSNumber(snumber) )
   {
     if (xhr) {
       var obj = document.getElementById(divID);
@@ -53,6 +49,7 @@ function validName(cname)
   }
 }
 
+//Phonee Validation
 function validPhone(mphone)
 {
   var pattern = /^[0-9]*$/;
@@ -82,4 +79,14 @@ function validPhone(mphone)
 
 
   }
+}
+
+function validSNumber(snumber)
+{
+  if(snumber == null || snumber.length == 0)
+  {
+    alert("Please enter a street number");
+    return false;
+  }
+  return true;
 }
