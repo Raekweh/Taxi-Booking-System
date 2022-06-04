@@ -30,13 +30,10 @@
 		$pickupDate = $_POST['pickupdate'];
 		$pickupTime = $_POST['pickuptime'];
     
-			//Inserting Command
-			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime, Status)
-			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime', 'Unassigned')";
-
 		//Inserting Command
 		$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime, Status)
 		VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime', 'Unassigned')";
+		
 		$existenceResults = @mysqli_query($conn, $tableExistence);
 		//Validation results
 		if ($existenceResults !== FALSE) 
