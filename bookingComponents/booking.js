@@ -1,6 +1,5 @@
 //
 var xhr = createRequest();
-var name
 function getData(dataSource, divID, cname, mphone, unumber, snumber, stname, sbname, dsbname, pdate, ptime) {
   if (validName(cname) && validPhone(mphone) && validSNumber(snumber) && validStNumber(stname) && validPickupDateTime(pdate,ptime)) {
     if (xhr) {

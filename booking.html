@@ -19,16 +19,16 @@
             <form>
                 <label>Customer Name:  <input type="text" name="cname" autocomplete="off"> </label>
                 <label><br>Phone Number: <input type="text" name="phone" autocomplete="off" minlength="10" maxlength="12"></label>
-                <label><br>Unit Number: <input type="text" name="unumber"></label>
-                <label><br>Street Number: <input type="text" name="snumber"></label>
-                <label><br>Street Name: <input type="text" name="stname"></label>
-                <label><br>Suburb: <input type="text" name="sbname"></label>
-                <label><br>Destination Suburb: <input type="text" name="dsbname"></label>
+                <label><br>Unit Number: <input type="text" name="unumber" autocomplete="off"></label>
+                <label><br>Street Number: <input type="text" name="snumber" autocomplete="off"></label>
+                <label><br>Street Name: <input type="text" name="stname" autocomplete="off"></label>
+                <label><br>Suburb: <input type="text" name="sbname" autocomplete="off"></label>
+                <label><br>Destination Suburb: <input type="text" name="dsbname" autocomplete="off"></label>
                 <label><br>Pick-up Date: <input type="date" name="date"></label>
-                <label><br>Pick-up Time: <input type="time" name="time">  <br><br> </label>
+                <label><br>Pick-up Time: <input type="time" name="time"> <br><br> </label>
 
                <input name="submit" type = "button"
-                onClick = "getData('booking.php','content', cname.value, phone.value, unumber.value, snumber.value, stname.value ,sbname.value, dsbname.value, date.value, time.value) " 
+                onClick = "bookingData('booking.php','content', cname.value, phone.value, unumber.value, snumber.value, stname.value ,sbname.value, dsbname.value, date.value, time.value) " 
                 value = "Fetch from server">
        
             </form>

@@ -29,6 +29,10 @@
 		$desintationSuburb = $_POST['destinationsuburb'];
 		$pickupDate = $_POST['pickupdate'];
 		$pickupTime = $_POST['pickuptime'];
+    
+			//Inserting Command
+			$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime, Status)
+			VALUES ('$customerName' ,'$phoneNumber', '$unitNumber', '$streetNumber', '$streetName', '$suburbName', '$desintationSuburb', '$pickupDate', '$pickupTime', 'Unassigned')";
 
 		//Inserting Command
 		$insert_sql = "INSERT INTO $sql_tble (CustomerName, PhoneNumber, UnitNumber, StreetNumber, StreetName, Suburb, DestinationSuburb, PickupDate, PickupTime, Status)
@@ -70,11 +74,12 @@
 			while($referRow =  mysqli_fetch_assoc($referenceNumber))
 			{
 				$BRN = substr($BRNString , 0, strlen($BRNString) - strlen($referRow['latestRefer']));
+
 				//Interating through the latest row
 				while($lrow = mysqli_fetch_assoc($latestResults))
 				{
-					echo "<tr><th>Booking Reference Number: </th> <td>",$BRNString . $lrow["ReferNumber"],"</td></tr>";
-					echo "<tr><th>Pickup Time: </th><td>",date("G:i", strtotime($lrow["PickupTime"])),"</td></tr>";
+					echo "<tr><th>Booking Reference Number: </th> <td>",$BRN . $lrow["ReferNumber"],"</td></tr>";
+					echo "<tr><th>Pickup Time: </th><td>",date("H:i", strtotime($lrow["PickupTime"])),"</td></tr>";
 					echo "<tr><th>Pickup Date: </th><td>",date('d/m/Y', strtotime($lrow["PickupDate"])),"</td></tr>";
 				}
 			}
