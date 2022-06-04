@@ -1,3 +1,7 @@
+<!-- Student Name: Raymond Li -->
+<!-- Student ID: 18028813 -->
+
+<!-- The sqlinfo.php is used for the databse information and sql commands -->
 <?php
     //Database information
     $sql_host = "cmslamp14.aut.ac.nz";
@@ -8,6 +12,7 @@
 
     //Existence of table
     $tableExistence = "SELECT 1 FROM $sql_tble";
+
     //Creating table. Need to add status and assign
     $creatingTable = "CREATE TABLE $sql_tble(
         ReferNumber INT AUTO_INCREMENT NOT NULL,
@@ -26,6 +31,7 @@
 
     //Retreiving the latest query
     $latest_refNumber_query = "SELECT * FROM $sql_tble ORDER BY ReferNumber DESC LIMIT 1";
+    
 	//Getting the max reference number
 	$refereNumber_query = "SELECT MAX(ReferNumber) AS latestRefer FROM $sql_tble";
 ?>

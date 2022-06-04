@@ -1,3 +1,8 @@
+<!-- Student Name: Raymond Li -->
+<!-- Student ID: 18028813  -->
+
+<!-- Booking.php is used for users to register a booking while generating a unique booking reference number for the user -->
+<!-- displayingBRN function is used to display relavent information in regards of the user's booking -->
 <?php
 	require_once('./conf/sqlinfo.php');
 
@@ -46,7 +51,7 @@
 		{
 			$creatingTableResult = @mysqli_query($conn,$creatingTable);
 			if($creatingTableResult !== FALSE)
-				{
+			{
 				$insertingResult = @mysqli_query($conn, $insert_sql);
 				displayingBRN($conn, $latest_refNumber_query, $refereNumber_query);
 			}
@@ -83,3 +88,4 @@
 		}
 		echo "</table>";
 	}
+?>
