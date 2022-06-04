@@ -81,6 +81,7 @@ function validPhone(mphone)
   }
 }
 
+//Street Number validation
 function validSNumber(snumber)
 {
   if(snumber == null || snumber.length == 0)
@@ -89,4 +90,48 @@ function validSNumber(snumber)
     return false;
   }
   return true;
+}
+
+//Street Name validation
+function validStNumber(stname)
+{
+  var pattern = /^[a-zA-Z\s]*$/;
+  if(stname == null || stname.length == 0)
+  {
+    alert("Please enter a street name");
+    return false;
+  }
+  else{
+    if(stname.match(patter))
+    {
+      return true;
+    }
+    else{
+      alert("Please ensure that your street name does not include any number or special characters");
+      return false;
+    }
+  }
+}
+//
+function validPickupDate(pdate, ptime)
+{
+  var currentDate = new Date().toISOString;
+  var input = new Date(pdate).toISOString;
+
+  var currentDateObject = new Date()
+
+  if(input == null)
+  {
+    alert("Please select a date");
+    return false;
+  }
+  else{
+    if (input >= currentDate)
+    {
+      return true;
+    }
+    else{
+      alert("Please select a date from the current date on wards");
+    }
+  }
 }
