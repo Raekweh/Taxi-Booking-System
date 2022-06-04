@@ -1,0 +1,15 @@
+
+CREATE TABLE bookingInfo(
+        ReferNumber INT AUTO_INCREMENT NOT NULL,
+        CustomerName VARCHAR(30) NOT NULL,
+        PhoneNumber VARCHAR(12) NOT NULL,
+        UnitNumber VARCHAR(5),
+        StreetNumber INT NOT NULL,
+        StreetName VARCHAR(50) NOT NULL,
+        Suburb VARCHAR(50),
+        DestinationSuburb VARCHAR(50),
+        PickupDate DATE NOT NULL,
+        PickupTime TIME NOT NULL,
+        Status VARCHAR(15) NOT NULL,
+        PRIMARY KEY (ReferNumber)
+        )
