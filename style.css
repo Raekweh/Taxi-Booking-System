@@ -13,7 +13,9 @@ body{
 {
     border: 1px solid #000000;
     margin-top: 10%;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
     background-color: #62cae6;
+    border: 1px solid #000000;
+    border-radius: 15px;
 }

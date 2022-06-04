@@ -4,25 +4,29 @@
 <!-- Admin.html is used as the frontend of the admin viewing -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type="text/javascript" src="xhr.js"></script>
-        <script type="text/javascript" src="adminComponents/admin.js"> </script>
-        <link rel = "stylesheet" type = "text/css" href = "style.css" media="screen" />
-    </head>
-    <body>
-        <div class = "bodyContent">
-            <div class = "heading">
-                <h1>
-                    Taxi Booking System
-                </h1>
-            </div>
 
-            <div id = "content">
-                <form >
-                    <input type = "text" name = "bsearch" maxlength = "8" placeholder = "BRN00000">
-                    <input type = "button" name = "sbutton" value = "Fetch" onClick = "adminData('admin.php', 'content', bsearch.value)">
-                </form>
-            </div>
+<head>
+    <script type="text/javascript" src="xhr.js"></script>
+    <script type="text/javascript" src="adminComponents/admin.js"> </script>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1>
+                Booking Ticket System
+            </h1>
         </div>
-    </body>
+
+        <div id="content">
+            <form>
+                <input type="text" name="bsearch" maxlength="8" placeholder="BRN00000">
+                <input type="button" name="sbutton" value="search"
+                    onClick="adminData('admin.php', 'content', bsearch.value)">
+            </form>
+        </div>
+    </div>
+</body>
+
 </html>
